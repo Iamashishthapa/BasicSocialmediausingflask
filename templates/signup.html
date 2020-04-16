@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    Signup
+{%endblock%}
+
+{%block body%}
+    Welcome to Klashs. You can Sign in Below.
+    <div>
+        <form action="#" method="POST">
+            <p><input type="text" placeholder="Enter Name" name="user"></p>
+            <p><input type="Email" placeholder="Enter Name" name="email"></p>
+            <p><input type="password" placeholder="Enter Password" name="pw"></p>
+            <p class="button"><input type="submit" value="Sign up"></p>
+        </form>
+    </div>
+    <p><a href="{{url_for('home')}}">Home</a></p>
+{%endblock%}
