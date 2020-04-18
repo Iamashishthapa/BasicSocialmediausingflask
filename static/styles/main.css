@@ -1,8 +1,8 @@
 .button {
-    background-color: #4CAF50;
+    background-color: goldenrod;
     border: none;
-    color: white;
-    padding: 15px 32px;
+    color:green;
+    padding: 4px 8px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -10,3 +10,53 @@
     margin: 4px 2px;
     cursor: pointer;
   }
+
+.hyperlink{
+  text-align: center;
+  background-color: goldenrod;
+  color:green;
+  padding: 4px 8px;
+  margin: 4px 2px;
+  display: inline-block;
+}
+
+.box{
+  width: 450px;
+  margin: auto;
+}
+.text-center{
+  padding: 10px 10px 10px 10px;
+}
+
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+  color: red;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  padding-top: 20px;
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+  .sidenav {
+    height: auto;
+    padding: 15px;
+  }
+  .row.content {height:auto;} 
+}

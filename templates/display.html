@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    Login
+{%endblock%}
+
+{%block body%}
+    {% for new in user %}
+       <p>name:{{new.name}}</p>
+    {% endfor %}
+    <p> <a href="{{url_for('home')}}">Home</a> </p>
+{%endblock%}
