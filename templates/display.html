@@ -6,7 +6,10 @@
 
 {%block body%}
     {% for new in user %}
-       <p>name:{{new.name}}</p>
+    <div class="col-sm-16" style="background-color:lightgray;padding-top:8px;">
+        <div class="container-fluid">
+        <p>Name :{{" " + new.name}}</p>
+        </div>
+    </div>
     {% endfor %}
-    <p> <a href="{{url_for('home')}}">Home</a> </p>
 {%endblock%}
