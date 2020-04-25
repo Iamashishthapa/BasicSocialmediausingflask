@@ -11,9 +11,9 @@ db = SQLAlchemy(app)
 
 class users(db.Model):
     _id = db.Column("id",db.Integer,primary_key=True)
-    name = db.Column(db.String(100))
-    email = db.Column(db.String(100))
-    password = db.Column(db.String(100))
+    name = db.Column(db.String(100),nullable=False)
+    email = db.Column(db.String(100),unique=True,nullable=False)
+    password = db.Column(db.String(100),nullable=False)
     
     def __init__(self,name,email,password):
         self.name=name
@@ -31,9 +31,9 @@ def signup():
         return redirect(url_for("welcome",user=user))
     else:
         if request.method == "POST":
-            user = request.form['user']
-            email =request.form['email']
-            password =request.form['pw']
+            user = request.form['suser']
+            email =request.form['semail']
+            password =request.form['spw']
             session["user"] = user
             usr=users(user,email,password)
             db.session.add(usr)
