@@ -1,24 +1,7 @@
-from flask import Flask,url_for,render_template,request,session,redirect,flash
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime 
-
-app = Flask(__name__)
-app.secret_key="ashish123"
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///site.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-
-class users(db.Model):
-    _id = db.Column("id",db.Integer,primary_key=True)
-    name = db.Column(db.String(100),nullable=False)
-    email = db.Column(db.String(100),unique=True,nullable=False)
-    password = db.Column(db.String(100),nullable=False)
-    
-    def __init__(self,name,email,password):
-        self.name=name
-        self.email=email 
-        self.password=password
+from flask import url_for,render_template,request,session,redirect,flash
+from main import app
+from main.models import  User, Post
+from main import db
 
 @app.route("/")
 def home():
@@ -27,7 +10,7 @@ def home():
 @app.route("/signup",methods=['GET', 'POST'])
 def signup():
     if "user" in session:
-        user=session["user"]
+        user = session["user"]
         return redirect(url_for("welcome",user=user))
     else:
         if request.method == "POST":
@@ -35,7 +18,7 @@ def signup():
             email =request.form['semail']
             password =request.form['spw']
             session["user"] = user
-            usr=users(user,email,password)
+            usr=User(user,email,password)
             db.session.add(usr)
             db.session.commit()
             return redirect(url_for("welcome",user=user))
@@ -49,13 +32,14 @@ def login():
         return redirect(url_for("welcome",user=user))
     else:
         if request.method == "POST":
-            user = request.form['user']
-            password = request.form['pw']
-            found_user = users.query.filter_by(name=user).first()
-            if found_user:
-                if password == found_user.password:
+            email = request.form['lemail']
+            password = request.form['lpw']
+            found_email = User.query.filter_by(email=email).first()
+            if found_email:
+                if password == found_email.password:
+                    user = found_email.name
                     session["user"] = user
-                    # session["email"]=found_user.email
+                    #session["email"]=found_user.email
                     return redirect(url_for('welcome',user=user))
                 else:
                     flash("Wrong Password","info")
@@ -68,26 +52,32 @@ def login():
 def welcome():
     if "user" in session:
         user = session["user"]
-        if request.method == "POST":
-            email=request.form["email"]
-            session.email=email
-            found_user= users.query.filter_by(name=user).first()
-            found_user.email=email
-        return render_template('welcome.html',user=user)
+        posted = Post.query.all()
+        return render_template('welcome.html',user=user,posted=posted)
     else:
         return redirect(url_for("signup"))
+
+@app.route("/post/new",methods=['GET', 'POST'])
+def newpost():
+    if "user" in session:
+        if request.method == "POST":
+            title = request.form['title']
+            content =request.form['content']
+            post = Post(title=title,content=content,author=session["user"])
+            db.session.add(post)
+            db.session.commit()
+            return redirect(url_for("welcome",user=session["user"]))
+        return render_template("newpost.html")
+    else:
+        return f"Please Login!"
+
 
 @app.route("/logout")
 def logout():
     session.pop("user" , None)
     return redirect(url_for("login"))
 
-@app.route("/display")
+@app.route("/display",)
 def display():
-    user = users.query.all()
+    user = User.query.all()
     return render_template("display.html",user=user)
-
-if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True)
-

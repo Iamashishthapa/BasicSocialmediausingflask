@@ -1,5 +1,9 @@
 {
     "python.pythonPath": "/home/iamashish/Documents/basicLoginusingFlask/flask/bin/python3.6",
     
-    "python.linting.pylintArgs": ["--load-plugins", "pylint-flask"]
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint-flask"
+    ],
+    "git.ignoreLimitWarning": true
 }

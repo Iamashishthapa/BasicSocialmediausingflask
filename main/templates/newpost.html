@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+
+{%block title%}
+New Post
+{%endblock%}
+{%block body%}
+<div class="text-center col-sm-8 text-left">
+    <form action="#" name="newpost" onsubmit="return validateForm(newpost)" method="POST" class="form-group">
+    <p><input type="text" class="form-control" placeholder="Enter Title" name="title"></p>
+    <p><input type="text" class="form-control" placeholder="Enter Content" name="content"></p>
+    <p><input class="btn btn-primary" type="submit" value="Post"></p>
+    </form>
+    <p class="btn btn-info"><a href="{{url_for('home')}}">Home</a></p>
+</div>
+<script type=text/javascript src="{{ url_for('static', filename='scripts/newpost.js') }}"></script>
+
+{%endblock%}

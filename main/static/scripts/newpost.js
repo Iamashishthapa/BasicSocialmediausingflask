@@ -1,12 +1,12 @@
 function validateForm(formId)
     {
-        var empt = document.forms["svalidation"]["suser"].value;
+        var empt = document.forms["newpost"]["title"].value;
         if (empt==null || empt=="")
         {
             alert("Name is empty");
             return false;
         }
-        var empt = document.forms["svalidation"]["semail"].value;
+        var empt = document.forms["newpost"]["content"].value;
         if (empt==null || empt=="")
         {
             alert("Email is empty");
@@ -20,4 +20,5 @@ function validateForm(formId)
         }
     }
 
-console.log("console")
+console.log("newpost")
+

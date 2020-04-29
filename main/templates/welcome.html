@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{%block title%}
+    Login
+{%endblock%}
+
+{%block body%}
+
+{%block top%}
+<ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('newpost')}}"><span class="glyphicon glyphicon-log-in"></span>New Post</a></li>
+    </ul>
+    {%endblock%}   
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            Welcome {{user}}
+        </div>
+    </div>
+</nav>
+{%for post in posted%}
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p>Posted By {{post.user_id}}</p>
+                <p>{{post.title}}</p>
+                <p>{{post.content}}</p>
+        </div>
+    </div>
+</nav>
+{%endfor%}
+<p class="btn btn-info"><a href="{{url_for('logout')}}">Logout</a></p>
+{%endblock%}
