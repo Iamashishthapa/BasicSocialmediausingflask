@@ -11,7 +11,7 @@
     <li><a href="{{url_for('newpost')}}"><span class="glyphicon glyphicon-log-in"></span>New Post</a></li>
     </ul>
     {%endblock%}   
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
             Welcome {{user}}
@@ -19,15 +19,13 @@
     </div>
 </nav>
 {%for post in posted%}
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <p>Posted By {{post.user_id}}</p>
-                <p>{{post.title}}</p>
-                <p>{{post.content}}</p>
-        </div>
+        <p>{{post.user_id}}   {{post.date_posted.strftime('%Y-%m-%d')}}</p>
+        <p>{{post.title}}</p>
+        <p>{{post.content}}</p>
     </div>
 </nav>
 {%endfor%}
-<p class="btn btn-info"><a href="{{url_for('logout')}}">Logout</a></p>
+<p class="btn btn-danger"><a href="{{url_for('logout')}}" style="color: white;">Logout</a></p>
 {%endblock%}

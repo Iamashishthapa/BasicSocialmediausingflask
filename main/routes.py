@@ -52,7 +52,7 @@ def login():
 def welcome():
     if "user" in session:
         user = session["user"]
-        posted = Post.query.all()
+        posted = Post.query.order_by(Post.date_posted.desc()).all()
         return render_template('welcome.html',user=user,posted=posted)
     else:
         return redirect(url_for("signup"))
